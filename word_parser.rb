@@ -1,13 +1,13 @@
 class WordParser
-  attr_reader :word
+  attr_reader :words
 
-  def initialize(word)
-    @word = word
+  def initialize(words)
+    @words = words
   end
 
-  def printed_anagrams
-    individual_anagrams.map do |individual_anagram|
-      puts individual_anagram
+  def anagrams
+    grouped_words.keep_if do |grouped_word|
+      grouped_word.length >= anagram_length
     end
   end
 
@@ -19,22 +19,11 @@ class WordParser
     end
   end
 
+  def anagram_length
+    2
+  end
+
   def grouped_words
     sorted_words.values
   end
-
-  def anagrams
-    grouped_words.keep_if do |grouped_word|
-      grouped_word.length >= 2
-    end
-  end
-
-  def joined_anagrams
-    anagrams.join(' ')
-  end
-
-  def individual_anagrams
-    joined_anagrams.split
-  end
-
 end
